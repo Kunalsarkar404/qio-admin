@@ -1,0 +1,46 @@
+.admin-login {
+    min-height: 100vh;
+    background: #263141;
+    display: grid;
+    place-items: center;
+    padding: 24px
+}
+
+.login-card {
+    width: min(430px, 100%);
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: 0 28px 80px #141c2870
+}
+
+.login-brand {
+    padding: 0 0 42px;
+    color: #1e2430
+}
+
+.login-card h1 {
+    font-size: 30px;
+    letter-spacing: -.04em;
+    margin: 0 0 8px
+}
+
+.login-card .page-subtitle {
+    line-height: 1.6;
+    margin-bottom: 26px
+}
+
+.login-submit {
+    width: 100%;
+    justify-content: center;
+    margin-top: 6px
+}
+
+.login-error {
+    margin: 0;
+    color: #c04c4c;
+    font-size: 11px;
+    background: #fff0ee;
+    padding: 9px;
+    border-radius: 7px
+}

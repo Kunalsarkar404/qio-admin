@@ -1,0 +1,89 @@
+#root {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    text-align: left;
+    border: 0;
+    min-height: 100vh;
+    display: block
+}
+
+h1,
+h2 {
+    font-family: inherit;
+    font-weight: inherit;
+    color: inherit
+}
+
+h1 {
+    font-size: inherit;
+    letter-spacing: normal;
+    margin: 0
+}
+
+p {
+    margin: 0
+}
+
+@media(max-width:720px) {
+    .sidebar {
+        display: none
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%
+    }
+
+    .mobile-menu {
+        display: grid;
+        place-items: center
+    }
+
+    .topbar {
+        padding-inline: 18px
+    }
+
+    .live-dot {
+        display: none
+    }
+
+    .page-wrap {
+        padding: 25px 16px 45px
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column
+    }
+
+    .heading-actions {
+        width: 100%
+    }
+
+    .heading-actions .secondary-button,
+    .heading-actions .primary-button {
+        flex: 1;
+        justify-content: center
+    }
+
+    .quick-grid {
+        grid-template-columns: 1fr
+    }
+
+    .table-panel {
+        overflow-x: auto
+    }
+
+    .table-panel table {
+        min-width: 620px
+    }
+
+    .metric-card {
+        padding: 15px
+    }
+
+    .metric-card>strong {
+        font-size: 22px
+    }
+}
