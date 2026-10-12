@@ -1,22 +1,22 @@
 import { apiRequest } from '../../lib/apiClient'
 import type { AdminProduct } from './types'
 
-export async function listAdminProducts(token: string) {
-  return apiRequest<{ products: AdminProduct[]; categories: string[] }>('/admin/products', { token })
+export function listAdminProducts() {
+  return apiRequest<{ products: AdminProduct[]; categories: string[] }>('/admin/products')
 }
 
-export async function getAdminProduct(token: string, id: string) {
-  return apiRequest<{ product: AdminProduct }>(`/admin/products/${id}`, { token })
+export function getAdminProduct(id: string) {
+  return apiRequest<{ product: AdminProduct }>(`/admin/products/${id}`)
 }
 
-export async function createAdminProduct(token: string, formData: FormData) {
-  return apiRequest<{ product: AdminProduct }>('/admin/products', { method: 'POST', token, formData })
+export function createAdminProduct(formData: FormData) {
+  return apiRequest<{ product: AdminProduct }>('/admin/products', { method: 'POST', formData })
 }
 
-export async function updateAdminProduct(token: string, id: string, formData: FormData) {
-  return apiRequest<{ product: AdminProduct }>(`/admin/products/${id}`, { method: 'PATCH', token, formData })
+export function updateAdminProduct(id: string, formData: FormData) {
+  return apiRequest<{ product: AdminProduct }>(`/admin/products/${id}`, { method: 'PATCH', formData })
 }
 
-export async function deleteAdminProduct(token: string, id: string) {
-  return apiRequest<{ id: string }>(`/admin/products/${id}`, { method: 'DELETE', token })
+export function deleteAdminProduct(id: string) {
+  return apiRequest<{ id: string }>(`/admin/products/${id}`, { method: 'DELETE' })
 }

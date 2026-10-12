@@ -1,33 +1,34 @@
-export interface AdminReview {
-    _id: string;
-    product: {
-        _id: string;
-        name: string;
-        image: string;
-    };
-    user: {
-        _id: string;
-        name: string;
-        email: string;
-    };
-    rating: number;
-    title: string;
-    comment: string;
-    helpful: number;
-    unhelpful: number;
-    verified: boolean;
-    createdAt: string;
-    updatedAt: string;
+import type { PageInfo, UserRef } from '../../types'
+
+export type ReviewStatus = 'approved' | 'rejected'
+
+/** serializeAdminReview (admin.controller.js) */
+export type AdminReview = {
+    _id: string
+    product: { _id: string; name: string; image: string } | null
+    user: UserRef | null
+    /** Display name the reviewer posted under */
+    name: string
+    rating: number
+    text: string
+    status: ReviewStatus
+    rejectReason: string
+    verified: boolean
+    createdAt: string
+    updatedAt: string
 }
 
-export interface ReviewStats {
-    totalReviews: number;
-    averageRating: number;
-    ratingDistribution: {
-        5: number;
-        4: number;
-        3: number;
-        2: number;
-        1: number;
-    };
+export type ReviewListResponse = { reviews: AdminReview[] } & PageInfo
+
+export type ReviewFilters = {
+    productId?: string
+    rating?: number | ''
+    status?: ReviewStatus | ''
+}
+
+export type ReviewStats = {
+    totalReviews: number
+    averageRating: number
+    rejectedReviews: number
+    ratingDistribution: Record<'1' | '2' | '3' | '4' | '5', number>
 }

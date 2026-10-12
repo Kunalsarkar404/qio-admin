@@ -291,3 +291,70 @@
         grid-template-columns: 1fr
     }
 }
+.rating-empty {
+    color: #e2e5ea
+}
+
+.brand-card.is-inactive {
+    background: #fafbfc
+}
+
+.brand-card.is-inactive .brand-logo {
+    background: #c3c9d2
+}
+
+.brand-card .status-pill {
+    display: inline-block;
+    margin-top: 6px
+}
+
+.brand-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: none !important
+}
+
+.row-menu:disabled {
+    opacity: .5;
+    cursor: default
+}
+
+.chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px
+}
+
+.checkbox-row.chip {
+    border: 1px solid #e7e9ee;
+    border-radius: 20px;
+    padding: 6px 12px
+}
+
+@media(max-width:1050px) {
+    .brand-grid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}
+
+.adjust-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px
+}
+
+/* Two-line table cell: bold title over a muted, wrapping description */
+.cell-stack strong,
+.cell-stack small {
+    display: block
+}
+
+.cell-stack small {
+    max-width: 52ch;
+    margin-top: 2px;
+    color: #667180;
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: normal
+}

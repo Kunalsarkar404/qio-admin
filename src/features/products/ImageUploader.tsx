@@ -9,12 +9,14 @@ export function ImageUploader({
   onRemoveExisting,
   onAddFiles,
   onRemovePending,
+  canAdd = true,
 }: {
   existingImages: string[]
   pendingImages: PendingImage[]
   onRemoveExisting: (url: string) => void
   onAddFiles: (files: File[]) => void
   onRemovePending: (index: number) => void
+  canAdd?: boolean
 }) {
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -37,10 +39,12 @@ export function ImageUploader({
             </button>
           </div>
         ))}
-        <button type="button" className="image-add" onClick={() => inputRef.current?.click()}>
-          <ImagePlus size={20} />
-          <span>Add photo</span>
-        </button>
+        {canAdd && (
+          <button type="button" className="image-add" onClick={() => inputRef.current?.click()}>
+            <ImagePlus size={20} />
+            <span>Add photo</span>
+          </button>
+        )}
       </div>
       <input
         ref={inputRef}

@@ -1,51 +1,24 @@
-import { apiRequest } from '../../lib/apiClient';
-import type { AdminOrder, OrderStats } from './types';
+import { apiRequest, downloadCsv } from '../../lib/apiClient'
+import type { AdminOrder, OrderFilters, OrderListResponse, OrderStats, OrderStatus } from './types'
 
-export async function listAdminOrders(
-    token: string,
-    filters?: {
-        status?: string;
-        startDate?: string;
-        endDate?: string;
-        userId?: string;
-    }
-) {
-    const query = new URLSearchParams();
-    if (filters?.status) query.append('status', filters.status);
-    if (filters?.startDate) query.append('startDate', filters.startDate);
-    if (filters?.endDate) query.append('endDate', filters.endDate);
-    if (filters?.userId) query.append('userId', filters.userId);
-
-    const queryString = query.toString();
-    const url = `/admin/orders${queryString ? `?${queryString}` : ''}`;
-
-    return apiRequest<{ orders: AdminOrder[] }>(url, { token });
+export function listAdminOrders(filters: OrderFilters & { page?: number; limit?: number } = {}) {
+    return apiRequest<OrderListResponse>('/admin/orders', { query: filters })
 }
 
-export async function getAdminOrder(token: string, id: string) {
-    return apiRequest<{ order: AdminOrder }>(`/admin/orders/${id}`, { token });
+export function getAdminOrder(id: string) {
+    return apiRequest<{ order: AdminOrder }>(`/admin/orders/${id}`)
 }
 
-export async function updateOrderStatus(
-    token: string,
-    id: string,
-    status: string
-) {
-    return apiRequest<{ order: AdminOrder }>(`/admin/orders/${id}`, {
-        method: 'PATCH',
-        token,
-        json: { status },
-    });
+/** Cancelled refunds the wallet and restocks; Delivered/Cancelled are terminal (409 on change). */
+export function updateOrderStatus(id: string, status: OrderStatus) {
+    return apiRequest<{ order: AdminOrder }>(`/admin/orders/${id}`, { method: 'PATCH', json: { status } })
 }
 
-export async function getOrderStats(token: string) {
-    return apiRequest<OrderStats>('/admin/orders/stats', { token });
+export function getOrderStats() {
+    return apiRequest<OrderStats>('/admin/orders/stats')
 }
 
-export async function exportOrders(token: string, format: 'csv' | 'json') {
-    return apiRequest<{ url: string }>('/admin/orders/export', {
-        token,
-        json: { format },
-        method: 'POST',
-    });
+/** Downloads GET /admin/orders/export as CSV with the same filters as the list. */
+export function exportOrdersCsv(filters: OrderFilters = {}) {
+    return downloadCsv('/admin/orders/export', filters, 'orders')
 }

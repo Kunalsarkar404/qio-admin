@@ -1,28 +1,27 @@
-export interface UserStreak {
-    _id: string;
-    user: {
-        _id: string;
-        name: string;
-        email: string;
-    };
-    currentStreak: number;
-    maxStreak: number;
-    lastVisitDate: string;
-    totalVisits: number;
+import type { PageInfo, UserRef } from '../../types'
+
+/** serializeStreakRow — `_id` is the user id */
+export type UserStreak = {
+    _id: string
+    user: UserRef | null
+    currentStreak: number
+    maxStreak: number
+    lastVisitDate: string | null
+    totalVisits: number
 }
 
-export interface StreakStats {
-    totalUsers: number;
-    usersWithStreaks: number;
-    averageCurrentStreak: number;
-    maxStreakRecord: number;
-    totalStreaks: number;
-    topStreakUsers: UserStreak[];
+export type StreakListResponse = { streaks: UserStreak[] } & PageInfo
+
+export type StreakFilters = {
+    search?: string
+    hasActiveStreak?: boolean
+    minStreak?: number
 }
 
-export interface StreakTrend {
-    date: string;
-    activeUsers: number;
-    newStreaks: number;
-    streaksLost: number;
+export type StreakStats = {
+    totalUsers: number
+    usersWithStreaks: number
+    averageCurrentStreak: number
+    maxStreakRecord: number
+    topStreakUsers: UserStreak[]
 }
